@@ -1,10 +1,10 @@
-package com.example.stock_porfolio;
+package com.example.stock_portfolio;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StockPorfolioApplicationTests {
+class StockPortfolioApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>stock-porfolio</artifactId>
+	<artifactId>${project.artifactId}</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>stock-porfolio</name>
+	<name>stock-portfolio</name>
 	<description>Stock Portfolio project using Spring Boot</description>
 	<url/>
 	<licenses>
@@ -30,6 +30,7 @@
 		<java.version>17</java.version>
 		<spring-ai.version>1.0.0-M7</spring-ai.version>
 		<spring-cloud-azure.version>5.22.0</spring-cloud-azure.version>
+		<project.artifactId>stock-portfolio</project.artifactId>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -133,7 +134,7 @@
 					<resourceGroup>your-resource-group</resourceGroup>
 					<appEnvironmentName>your-app-environment-name</appEnvironmentName>
 					<region>your-region</region>
-					<appName>stock-porfolio</appName>
+					<appName>stock-portfolio</appName>
 					<containers>
 						<container>
 							<type>code</type>

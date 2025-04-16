@@ -1,13 +1,13 @@
-package com.example.stock_porfolio;
+package com.example.stock_portfolio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StockPorfolioApplication {
+public class StockPortfolioApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StockPorfolioApplication.class, args);
+		SpringApplication.run(StockPortfolioApplication.class, args);
 	}
 
 }
