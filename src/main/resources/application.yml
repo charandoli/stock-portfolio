@@ -1,0 +1,101 @@
+# src/main/resources/application.yml
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: spring-boot-comprehensive-app
+
+  # MS-SQL Server Configuration
+  datasource:
+    url: jdbc:sqlserver://<your-sql-server-host>:<port>;databaseName=<your-database>;encrypt=true;trustServerCertificate=true; # Add trustServerCertificate=false for production with proper certs
+    username: <your-sql-username>
+    password: <your-sql-password>
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      ddl-auto: update # Or 'validate' or 'none' for production
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect # Updated dialect
+
+  # RabbitMQ Configuration
+  rabbitmq:
+    host: <your-rabbitmq-host> # e.g., localhost or RabbitMQ server IP/hostname
+    port: 5672
+    username: <your-rabbitmq-username>
+    password: <your-rabbitmq-password>
+    # virtual-host: / # Optional: if you use a specific virtual host
+
+  # MongoDB Configuration
+  data:
+    mongodb:
+      uri: mongodb://<your-mongo-username>:<your-mongo-password>@<your-mongo-host>:<port>/<your-mongo-database>?authSource=admin # Replace with your MongoDB connection string
+      # host: <your-mongo-host>
+      # port: 27017
+      # database: <your-mongo-database>
+      # username: <your-mongo-username> # if authentication is enabled
+      # password: <your-mongo-password> # if authentication is enabled
+
+  # Azure Cosmos DB Configuration
+  cloud:
+    azure:
+      cosmos:
+        uri: <your-cosmosdb-uri> # e.g., https://<your-cosmosdb-account-name>.documents.azure.com:443/
+        key: <your-cosmosdb-primary-key>
+        database: <your-cosmosdb-database-name>
+        # consistency-level: Session # Optional: e.g., Strong, BoundedStaleness, Session, Eventual, ConsistentPrefix
+        # connection-mode: DIRECT # Optional: GATEWAY or DIRECT
+        # populate-query-metrics: true # Optional: for diagnostics
+
+# OpenAPI / Swagger Configuration
+springdoc:
+  api-docs:
+    path: /v3/api-docs # Path for the OpenAPI specification
+  swagger-ui:
+    path: /swagger-ui.html # Path for Swagger UI
+    display-request-duration: true
+    groups-order: DESC
+    operations-sorter: alpha
+    # You can add more Swagger UI configurations here
+
+# Micrometer / Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # Exposes all actuator endpoints (health, metrics, info, etc.)
+  endpoint:
+    health:
+      show-details: always # Shows detailed health information
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    # Example of custom metrics export (e.g., Prometheus)
+    # export:
+    #   prometheus:
+    #     enabled: true
+    #     step: 1m # Polling interval
+
+# Custom Application Properties (Example)
+app:
+  rabbitmq:
+    exchange-name: "app.topic.exchange"
+    queue-name: "app.message.queue"
+    routing-key: "app.message.routingkey"
+    dead-letter-exchange-name: "app.dlx.exchange"
+    dead-letter-queue-name: "app.message.dlq"
+    dead-letter-routing-key: "app.message.dlq.routingkey"
+
+logging:
+  level:
+    org.springframework.web: INFO
+    com.example.springbootcomprehensiveapp: DEBUG
+    org.hibernate.SQL: DEBUG # To see SQL queries
+    org.hibernate.type.descriptor.sql: TRACE # To see SQL query parameters
+    org.springframework.amqp: INFO
+    com.azure.spring.data.cosmos: INFO
+  structured:
+    format.console: ecs
